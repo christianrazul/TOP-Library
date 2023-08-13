@@ -27,14 +27,19 @@ function addBookToLibrary() {
   let numOfPages = document.querySelector("#numOfPages").value;
   let hasRead = document.querySelector("#hasRead").checked;
 
-  // instantiate a new object to put the values into
-  let newBook = new Book(title, author, numOfPages, hasRead);
+  // check if fields have no value and send alert if empty
+  if (title === "" || author === "" || numOfPages === "" || hasRead === null) {
+    alert("All fields must be filled up");
+  } else {
+    // instantiate a new object to put the values into
+    let newBook = new Book(title, author, numOfPages, hasRead);
 
-  // push "newBook" object to myLibrary array
-  myLibrary.push(newBook);
+    // push "newBook" object to myLibrary array
+    myLibrary.push(newBook);
 
-  // call renderLibrary class
-  renderLibrary();
+    // call renderLibrary class
+    renderLibrary();
+  }
 }
 
 function renderLibrary() {
