@@ -29,7 +29,7 @@ function addBookToLibrary() {
 
   // check if fields have no value and send alert if empty
   if (title === "" || author === "" || numOfPages === "" || hasRead === null) {
-    alert("All fields must be filled up");
+    alert("Error: Fields cannot be empty.");
   } else {
     // instantiate a new object to put the values into
     let newBook = new Book(title, author, numOfPages, hasRead);
@@ -52,15 +52,17 @@ function renderLibrary() {
     bookDiv.classList.add("book-card");
     bookDiv.innerHTML = `
     <div class="card-header">
-      <h3 class="title">${book.title}</h3>
-      <h5 class="author>${book.author}</h3>
+      <h2 class="title">${book.title}</h2>
+      <h4 class="author">${book.author}</h4>
     </div>
     <div class="card-body">
       <p>${book.numOfPages} pages</p>
       <p class="hasRead-status">${book.hasRead ? "Read" : "Not Read Yet"}</p>
+      <div class="card-body-btn">
       <button class="remove-btn" onclick="removeBook(${i})">Remove Book</button>
       <button class="read-btn" onclick="hasReadToggle(${i})">Toggle Read</button>
-    </div>
+      </div>
+      </div>
     `;
     library.appendChild(bookDiv);
   }
@@ -74,8 +76,14 @@ function removeBook(index) {
 const newBookBtn = document.querySelector("#new-book-btn");
 newBookBtn.addEventListener("click", (e) => {
   let newBookForm = document.querySelector("#new-book-form");
-  // overwrites style property "display" to "block" so that it shows up in the browser.
-  newBookForm.style.display = "grid";
+
+  // hide form if already displayed
+  if (newBookForm.style.display === "grid") {
+    newBookForm.style.display = "none";
+  } else {
+    // overwrites style property "display" to "block" so that it shows up in the browser.
+    newBookForm.style.display = "grid";
+  }
 });
 
 const newBookForm = document.querySelector("#new-book-form");
