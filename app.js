@@ -70,7 +70,7 @@ const newBookBtn = document.querySelector("#new-book-btn");
 newBookBtn.addEventListener("click", (e) => {
   let newBookForm = document.querySelector("#new-book-form");
   // overwrites style property "display" to "block" so that it shows up in the browser.
-  newBookForm.style.display = "block";
+  newBookForm.style.display = "grid";
 });
 
 const newBookForm = document.querySelector("#new-book-form");
