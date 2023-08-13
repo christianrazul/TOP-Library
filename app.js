@@ -8,6 +8,17 @@ function Book(title, author, numOfPages, hasRead) {
   this.hasRead = hasRead;
 }
 
+// switches between read and not read
+Book.prototype.hasReadToggle = function () {
+  this.hasRead = !this.hasRead;
+};
+
+// function for button to toggle between read and not read yet when clicked
+function hasReadToggle(index) {
+  myLibrary[index].hasReadToggle();
+  renderLibrary();
+}
+
 // function to add Books to the library
 function addBookToLibrary() {
   // get the values of each form field
@@ -29,9 +40,11 @@ function addBookToLibrary() {
 function renderLibrary() {
   let library = document.querySelector(".library");
   library.innerHTML = "";
+  // loop through myLibrary to render out each book
   for (let i = 0; i < myLibrary.length; i++) {
     let book = myLibrary[i];
     let bookDiv = document.createElement("div");
+    bookDiv.classList.add("book-card");
     bookDiv.innerHTML = `
     <div class="card-header">
       <h3 class="title">${book.title}</h3>
@@ -40,9 +53,17 @@ function renderLibrary() {
     <div class="card-body">
       <p>${book.numOfPages} pages</p>
       <p class="hasRead-status">${book.hasRead ? "Read" : "Not Read Yet"}</p>
+      <button class="remove-btn" onclick="removeBook(${i})">Remove Book</button>
+      <button class="read-btn" onclick="hasReadToggle(${i})">Toggle Read</button>
     </div>
     `;
+    library.appendChild(bookDiv);
   }
+}
+
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  renderLibrary();
 }
 
 const newBookBtn = document.querySelector("#new-book-btn");
